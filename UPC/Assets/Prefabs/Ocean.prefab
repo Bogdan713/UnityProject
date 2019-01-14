@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6428193693101754851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6428193693101754849}
+  - component: {fileID: 6428193693101754848}
+  m_Layer: 0
+  m_Name: Ocean
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6428193693101754849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428193693101754851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6, y: 5.5, z: -1.0498357}
+  m_LocalScale: {x: 8.5988, y: 8.5988, z: 8.5988}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &6428193693101754848
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428193693101754851}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -5.3313856, y: 0.06426305}
+  - {x: -5.2942386, y: 0.095390394}
+  - {x: -4.5386167, y: 0.09928276}
+  - {x: -4.458234, y: 0.2380023}
+  - {x: -2.002529, y: 0.2172083}
+  - {x: -1.9435782, y: 0.11734759}
+  - {x: -0.49915847, y: 0.10465552}
+  - {x: -0.41623896, y: -0.0010212394}
+  - {x: 1.2526354, y: 0.026919495}
+  - {x: 1.3742431, y: 0.1278417}
+  - {x: 3.2377691, y: 0.12329375}
+  - {x: 3.334564, y: 0.23207232}
+  - {x: 5.2747884, y: 0.24007377}
+  - {x: 5.424634, y: 0.10820191}
+  - {x: 6.4612937, y: 0.12031255}
