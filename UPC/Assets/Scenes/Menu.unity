@@ -113,7 +113,11 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1845137514
+=======
+--- !u!1 &120466912
+>>>>>>> parent of bb89082... Some changes
 =======
 --- !u!1 &120466912
 >>>>>>> parent of bb89082... Some changes
@@ -125,10 +129,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 1845137517}
   - component: {fileID: 1845137516}
   - component: {fileID: 1845137515}
 =======
+=======
+>>>>>>> parent of bb89082... Some changes
   - component: {fileID: 120466916}
   - component: {fileID: 120466915}
   - component: {fileID: 120466914}
@@ -1019,6 +1026,9 @@ GameObject:
   - component: {fileID: 1885376116}
   - component: {fileID: 1885376115}
   - component: {fileID: 1885376114}
+<<<<<<< HEAD
+>>>>>>> parent of bb89082... Some changes
+=======
 >>>>>>> parent of bb89082... Some changes
   m_Layer: 0
   m_Name: Main Camera
@@ -1028,7 +1038,11 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!81 &1845137515
+=======
+--- !u!81 &1885376114
+>>>>>>> parent of bb89082... Some changes
 =======
 --- !u!81 &1885376114
 >>>>>>> parent of bb89082... Some changes
@@ -1038,9 +1052,15 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_GameObject: {fileID: 1845137514}
   m_Enabled: 1
 --- !u!20 &1845137516
+=======
+  m_GameObject: {fileID: 1885376113}
+  m_Enabled: 1
+--- !u!20 &1885376115
+>>>>>>> parent of bb89082... Some changes
 =======
   m_GameObject: {fileID: 1885376113}
   m_Enabled: 1
@@ -1052,7 +1072,11 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_GameObject: {fileID: 1845137514}
+=======
+  m_GameObject: {fileID: 1885376113}
+>>>>>>> parent of bb89082... Some changes
 =======
   m_GameObject: {fileID: 1885376113}
 >>>>>>> parent of bb89082... Some changes
@@ -1092,7 +1116,11 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!4 &1845137517
+=======
+--- !u!4 &1885376116
+>>>>>>> parent of bb89082... Some changes
 =======
 --- !u!4 &1885376116
 >>>>>>> parent of bb89082... Some changes
@@ -1102,7 +1130,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_GameObject: {fileID: 1845137514}
+=======
+  m_GameObject: {fileID: 1885376113}
+>>>>>>> parent of bb89082... Some changes
 =======
   m_GameObject: {fileID: 1885376113}
 >>>>>>> parent of bb89082... Some changes
