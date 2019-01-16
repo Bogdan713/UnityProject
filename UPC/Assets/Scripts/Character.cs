@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterState { Idle, Move }
+public enum CharacterState { Idle, Move}
 
 public class Character : MonoBehaviour
 {
@@ -41,8 +41,7 @@ public class Character : MonoBehaviour
         //State = CharacterState.AttackDown;
     }
 
-    bool canMove(int dir)
-    {
+    bool canMove(int dir) {
         Vector3 position = transform.position;
         //change on grow
 
