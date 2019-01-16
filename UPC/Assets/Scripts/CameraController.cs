@@ -15,5 +15,6 @@ public class CameraController : MonoBehaviour {
         Vector3 position = target.position;
         position.z = -10.1f;
         transform.position = Vector3.Lerp(transform.position, position, speed*Time.deltaTime);
+        Canvas canvas = new Canvas();
 	}
 }
