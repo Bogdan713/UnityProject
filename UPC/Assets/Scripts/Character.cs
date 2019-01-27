@@ -29,8 +29,6 @@ public class Character : MonoBehaviour
     {
         Vector3 vectorH = Vector3.right * Input.GetAxis("Horizontal");
         Vector3 vectorV = Vector3.up * Input.GetAxis("Vertical");
-        print(Input.GetAxis("Horizontal"));
-        print(Input.GetAxis("Vertical"));
         transform.position = Vector3.MoveTowards(transform.position, transform.position + vectorH, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, transform.position + vectorV, speed * Time.deltaTime);
         State = CharacterState.Move;
