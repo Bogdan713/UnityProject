@@ -20,15 +20,19 @@ public class LivesBar : MonoBehaviour
 
     public void Refresh()
     {
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            if (i < character.lives)
+        if (character != null) {
+            for (int i = 0; i < hearts.Length; i++)
             {
-                hearts[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                hearts[i].gameObject.SetActive(false);
+                if (i < character.health)
+                {
+                    hearts[i].gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    hearts[i].gameObject.SetActive(false);
+
+                }
             }
         }
 

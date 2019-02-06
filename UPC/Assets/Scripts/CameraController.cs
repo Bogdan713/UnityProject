@@ -9,19 +9,22 @@ public class CameraController : MonoBehaviour
     private Rect rect;
     Vector2 cameraPointMin;
     Vector2 cameraPointMax;
+    Vector3 positionTarget;
     private void Awake()
     {
         if (!target) target = FindObjectOfType<Character>().transform;
         rect = border.GetComponent<RectTransform>().rect;
-        
+        positionTarget = new Vector3();
     }
 
     void Update()
     {
-
-       
-        Vector3 positionTarget = target.position;
-        positionTarget.z = -10f;
+        
+        if (target != null)
+        {
+            positionTarget = target.position;
+            positionTarget.z = -10f;
+        }
         
         if (positionTarget.x < rect.xMin)
         {
@@ -40,7 +43,7 @@ public class CameraController : MonoBehaviour
         {
             positionTarget.y = rect.yMax;
         }
-
+        
         transform.position = Vector3.Lerp(transform.position, positionTarget, speed * Time.deltaTime);
     }
 }

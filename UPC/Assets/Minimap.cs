@@ -5,11 +5,14 @@ using UnityEngine;
 public class Minimap : MonoBehaviour
 {
     public Transform player;
-
+    Vector3 positionTarget;
     public void LateUpdate()
     {
-        Vector3 newPosition = player.position;
-        newPosition.z = transform.position.z;
-        transform.position = newPosition;
+        if (player != null)
+        {
+            positionTarget = player.position;
+            positionTarget.z = transform.position.z;
+            transform.position = positionTarget;
+        }
     }
 }

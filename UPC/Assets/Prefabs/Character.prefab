@@ -111,10 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28aaf7022e2a07b418c4e1d1ba9312d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  deathEffect: {fileID: 0}
+  livesBar: {fileID: 0}
   speed: 4
-  lives: 0
+  health: 0
+  attack: 0
 --- !u!50 &882874339255896711
 Rigidbody2D:
   serializedVersion: 4
