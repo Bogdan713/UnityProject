@@ -5,8 +5,9 @@ using UnityEngine;
 public class RayWeapon : MonoBehaviour
 {
     public Transform player;
-    public GameObject shootEffect;
+    public GameObject impactEffect;
     public LineRenderer lineRenderer;
+    public LineRenderer sublineRenderer;
 
     public IEnumerator Shoot(Vector2 targetPosition)
     {
@@ -24,21 +25,28 @@ public class RayWeapon : MonoBehaviour
         float xAdd = dx * playerRadius / (Mathf.Abs(dy) + Mathf.Abs(dx));
         float yAdd = dy * playerRadius / (Mathf.Abs(dy) + Mathf.Abs(dx));
 
-        Vector2 origin = new Vector2(playerPosition.x + xAdd, playerPosition.y + yAdd);
+        Vector2 origin = new Vector3(playerPosition.x + xAdd, playerPosition.y + yAdd);
 
         RaycastHit2D hitInfo = Physics2D.Raycast(origin, new Vector2(dx, dy));
         if (hitInfo)
-        { 
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, hitInfo.point);
+        {
+            lineRenderer.SetPosition(0, new Vector3(origin.x, origin.y, -2.1f));
+            lineRenderer.SetPosition(1, new Vector3(hitInfo.point.x, hitInfo.point.y, -2.1f));
+
+            sublineRenderer.SetPosition(0, new Vector3(origin.x, origin.y, -2f));
+            sublineRenderer.SetPosition(1, new Vector3(hitInfo.point.x, hitInfo.point.y, -2f));
 
             if (hitInfo.transform.tag.Equals("Enemy")) {
                 hitInfo.transform.gameObject.GetComponent<Enemy>().TakeDamage(player.GetComponent<Character>().attack);
             }
         }
         lineRenderer.enabled = true;
-        yield return new WaitForSeconds(0.05f);
+        sublineRenderer.enabled = true;
+        yield return new WaitForSeconds(0.04f);
         lineRenderer.enabled = false;
-        //Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
+        yield return new WaitForSeconds(0.03f);
+        
+        sublineRenderer.enabled = false;
+        Instantiate(impactEffect, new Vector3(hitInfo.point.x, hitInfo.point.y, -3f), Quaternion.identity);
     }
 }
