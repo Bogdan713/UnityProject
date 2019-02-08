@@ -5,8 +5,11 @@ using UnityEngine;
 public class Character : SlimeCreature
 {
     public LivesBar livesBar;
+    public float attackDistance;
+    RayWeapon rayWeapon;
+   // public bool isAttacking;
 
-    public new void TakeDamage(int damage)
+    public new void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         RefreshLivesBar();
@@ -17,7 +20,11 @@ public class Character : SlimeCreature
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5;
-        speed = 20;
+        speed = 10;
+        attack = 1;
+        attackDistance = 10;
+        //isAttacking = false;
+        rayWeapon = GetComponentInChildren<RayWeapon>();
     }
 
     public void RefreshLivesBar()
@@ -39,7 +46,20 @@ public class Character : SlimeCreature
 
     void Attack()
     {
-        //State = CharacterState.AttackDown;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float minDistanse = attackDistance + 1;
+        int id = 0;
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            if ((enemies[i].transform.position - transform.position).magnitude < minDistanse) {
+                minDistanse = (enemies[i].transform.position - transform.position).magnitude;
+                id = i;
+            }
+        }
+        if (minDistanse <= attackDistance) {
+            StartCoroutine(rayWeapon.Shoot(enemies[id].transform.position));
+        }
+        
     }
 
     void Update()
@@ -49,7 +69,7 @@ public class Character : SlimeCreature
         {
             Move();
         }
-        if (Input.GetKey("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
         }

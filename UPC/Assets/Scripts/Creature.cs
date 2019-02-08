@@ -10,11 +10,12 @@ public class SlimeCreature : MonoBehaviour
     public GameObject deathEffect;
 
     public float speed;
-    public int health;
-    public int attack;
-    public int reviewDistance;
+    public float health;
+    public float attack;
+    public float reviewDistance;
+    public float regeneration;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)

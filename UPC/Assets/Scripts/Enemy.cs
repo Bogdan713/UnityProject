@@ -5,6 +5,10 @@ using UnityEngine;
 public class Enemy : SlimeCreature
 {
     public Transform target;
+    private enum Dir {Towards, Backwards, Wait}
+    private Dir dirrection;
+    private Dir Dirrection { get => dirrection; set => dirrection = value; }
+    public float stagnation;
 
     protected void Awake()
     {
@@ -15,28 +19,24 @@ public class Enemy : SlimeCreature
         attack = 1;
         reviewDistance = 20;
         target = FindObjectOfType<Character>().transform;
+        dirrection = Dir.Wait;
+        stagnation = 1f;
     }
-    void AvoidPlayer() {
-        Vector3 targetPosition = target.position;
-        if ((targetPosition - transform.position).magnitude < 20)
-        {
-            MoveTo(transform.position - targetPosition);
-        }
+
+    void Wait() {
+        Dirrection = Dir.Wait;
+        stagnation = 0.5f;
     }
+
     void Attack()
     {
         //State = CharacterState.AttackDown;
     }
-    /*private void OnTriggerEnter2D(Collider2D collision)
+
+    public new void TakeDamage(float damage)
     {
-        Character character = collision.GetComponent<Character>();
-        if (character != null)
-        {
-            character.TakeDamage(attack);
-            Debug.Log("Character takes " + attack + " damage from Enemy");
-        }
-        
-    }*/
+        base.TakeDamage(damage);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -44,11 +44,14 @@ public class Enemy : SlimeCreature
         if (character != null)
         {
             character.TakeDamage(attack);
-            Debug.Log("Character takes " + attack + " damage from Enemy");
+            Wait();
+            //Debug.Log("Character takes " + attack + " damage from Enemy");
         }
     }
 
-    
+    bool TargetInRange() {
+        return (target.position - transform.position).magnitude < reviewDistance;
+    }
 
     // Update is called once per frame
     void Update()
@@ -56,8 +59,30 @@ public class Enemy : SlimeCreature
         State = AnimationState.Idle;
 
         //MoveTo(transform.position - target.position);//run away
+
+
+
         if (target!=null) {
-            MoveTo(target.position);//run to
+
+            if (TargetInRange()) {
+                if (Dirrection == Dir.Towards)
+                {
+                    MoveTo(target.position);//run to
+                }
+                if (Dirrection == Dir.Backwards)
+                {
+                    MoveTo(-target.position);
+                }
+            }
+            if (Dirrection == Dir.Wait)
+            {
+                if (stagnation > 0) {
+                    stagnation -= Time.deltaTime;
+                    MoveTo(-target.position);
+                } else {
+                    Dirrection = Dir.Towards;
+                }
+            }
         }
     }
 }

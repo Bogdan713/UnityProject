@@ -26,7 +26,6 @@ public class LivesBar : MonoBehaviour
                 if (i < character.health)
                 {
                     hearts[i].gameObject.SetActive(true);
-
                 }
                 else
                 {
