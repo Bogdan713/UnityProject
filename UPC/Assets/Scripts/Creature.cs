@@ -14,7 +14,7 @@ public class SlimeCreature : MonoBehaviour
     public float attack;
     public float reviewDistance;
     public float regeneration;
-
+     
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -26,7 +26,7 @@ public class SlimeCreature : MonoBehaviour
 
     public void Die()
     {
-        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y, deathEffect.transform.position.z), Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -40,5 +40,13 @@ public class SlimeCreature : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
         State = AnimationState.Move;
+    }
+    protected void MoveSubjTo(Vector3 direction)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+        State = AnimationState.Move;
+    }
+    protected void MoveOutOf(Vector3 direction) {
+        MoveSubjTo(transform.position - direction);
     }
 }

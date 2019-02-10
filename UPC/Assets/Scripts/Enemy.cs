@@ -71,14 +71,14 @@ public class Enemy : SlimeCreature
                 }
                 if (Dirrection == Dir.Backwards)
                 {
-                    MoveTo(-target.position);
+                    MoveOutOf(target.position);
                 }
             }
             if (Dirrection == Dir.Wait)
             {
                 if (stagnation > 0) {
                     stagnation -= Time.deltaTime;
-                    MoveTo(-target.position);
+                    MoveOutOf(target.position);
                 } else {
                     Dirrection = Dir.Towards;
                 }

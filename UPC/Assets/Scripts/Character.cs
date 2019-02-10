@@ -20,8 +20,8 @@ public class Character : SlimeCreature
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5;
-        speed = 10;
-        attack = 1;
+        speed = 20;
+        attack = 2;
         attackDistance = 10;
         //isAttacking = false;
         rayWeapon = GetComponentInChildren<RayWeapon>();

@@ -36,8 +36,21 @@ public class RayWeapon : MonoBehaviour
             sublineRenderer.SetPosition(0, new Vector3(origin.x, origin.y, -2f));
             sublineRenderer.SetPosition(1, new Vector3(hitInfo.point.x, hitInfo.point.y, -2f));
 
-            if (hitInfo.transform.tag.Equals("Enemy")) {
-                hitInfo.transform.gameObject.GetComponent<Enemy>().TakeDamage(player.GetComponent<Character>().attack);
+            if (hitInfo.transform.tag.Equals("Enemy"))
+            {
+                Enemy enemy = hitInfo.transform.gameObject.GetComponent<Enemy>();
+                Healer healer = hitInfo.transform.gameObject.GetComponent<Healer>();
+
+                if (enemy!=null) {
+                    enemy.TakeDamage(player.GetComponent<Character>().attack);
+                }
+
+                if (healer != null)
+                {
+                    healer.TakeDamage(player.GetComponent<Character>().attack);
+                }
+
+
             }
         }
         lineRenderer.enabled = true;
