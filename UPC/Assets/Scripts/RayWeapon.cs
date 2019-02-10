@@ -40,7 +40,7 @@ public class RayWeapon : MonoBehaviour
             {
                 Enemy enemy = hitInfo.transform.gameObject.GetComponent<Enemy>();
                 Healer healer = hitInfo.transform.gameObject.GetComponent<Healer>();
-
+                Boss boss = hitInfo.transform.gameObject.GetComponent<Boss>();
                 if (enemy!=null) {
                     enemy.TakeDamage(player.GetComponent<Character>().attack);
                 }
@@ -48,6 +48,11 @@ public class RayWeapon : MonoBehaviour
                 if (healer != null)
                 {
                     healer.TakeDamage(player.GetComponent<Character>().attack);
+                }
+
+                if (boss != null)
+                {
+                    boss.TakeDamage(player.GetComponent<Character>().attack);
                 }
 
 

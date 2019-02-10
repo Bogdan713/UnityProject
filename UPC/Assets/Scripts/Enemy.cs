@@ -15,9 +15,11 @@ public class Enemy : SlimeCreature
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5;
+        maxHealth = health;
         speed = 5;
         attack = 1;
         reviewDistance = 20;
+        regeneration = 1f;
         target = FindObjectOfType<Character>().transform;
         dirrection = Dir.Wait;
         stagnation = 1f;
@@ -82,6 +84,15 @@ public class Enemy : SlimeCreature
                 } else {
                     Dirrection = Dir.Towards;
                 }
+            }
+        }
+
+        if (health < maxHealth)
+        {
+            health += Time.deltaTime * regeneration;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
             }
         }
     }

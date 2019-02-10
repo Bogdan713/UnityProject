@@ -9,15 +9,19 @@ public class Healer : SlimeCreature
     private Dir dirrection;
     private Dir Dirrection { get => dirrection; set => dirrection = value; }
     public float stagnation;
+    public float minSpeed;
 
     protected void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        health = 10;
+        health = 5;
+        maxHealth = health;
         speed = 4;
-        attack = -1;
-        reviewDistance = 15;
+        minSpeed = speed;
+        attack = -2;
+        reviewDistance = 15; 
+        regeneration = 2f;
         target = FindObjectOfType<Character>().transform;
         dirrection = Dir.Backwards;
         stagnation = 1f;
@@ -29,16 +33,15 @@ public class Healer : SlimeCreature
         stagnation = 0.5f;
     }
 
-    void Attack()
+    void UpdateSpeed()
     {
-        //State = CharacterState.AttackDown;
+        speed = minSpeed * Mathf.Log(health, maxHealth);
+        animator.speed = 1 + (speed / 10f);
     }
 
     public new void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        speed += 1;
-        animator.speed = 1 + (speed / 10f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,8 +50,7 @@ public class Healer : SlimeCreature
         if (character != null)
         {
             character.TakeDamage(attack);
-            //Wait();
-            //Debug.Log("Character takes " + attack + " damage from Enemy");
+            TakeDamage(-attack);
         }
     }
 
@@ -91,6 +93,13 @@ public class Healer : SlimeCreature
                 {
                     Dirrection = Dir.Backwards;
                 }
+            }
+            if (health<maxHealth) {
+                health += Time.deltaTime * regeneration;
+                if (health > maxHealth) {
+                    health = maxHealth;
+                }
+                UpdateSpeed();
             }
         }
     }

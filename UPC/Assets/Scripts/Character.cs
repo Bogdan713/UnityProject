@@ -20,8 +20,10 @@ public class Character : SlimeCreature
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5;
+        maxHealth = health;
         speed = 20;
         attack = 2;
+        regeneration = 0.2f;
         attackDistance = 10;
         //isAttacking = false;
         rayWeapon = GetComponentInChildren<RayWeapon>();
@@ -46,18 +48,21 @@ public class Character : SlimeCreature
 
     void Attack()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        List<GameObject> enemies = new List<GameObject>();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Healer"));
         float minDistanse = attackDistance + 1;
         int id = 0;
-        for(int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if ((enemies[i].transform.position - transform.position).magnitude < minDistanse) {
+            if ((enemies[i].transform.position - transform.position).magnitude < minDistanse)
+            {
                 minDistanse = (enemies[i].transform.position - transform.position).magnitude;
                 id = i;
             }
         }
         if (minDistanse <= attackDistance) {
-            StartCoroutine(rayWeapon.Shoot(enemies[id].transform.position));
+                StartCoroutine(rayWeapon.Shoot(enemies[id].transform.position));
         }
         
     }
@@ -72,6 +77,15 @@ public class Character : SlimeCreature
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Attack();
+        }
+        if (health < maxHealth)
+        {
+            health += Time.deltaTime * regeneration;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+            RefreshLivesBar();
         }
     }
 }

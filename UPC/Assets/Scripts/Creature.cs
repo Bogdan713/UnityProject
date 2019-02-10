@@ -11,6 +11,7 @@ public class SlimeCreature : MonoBehaviour
 
     public float speed;
     public float health;
+    public float maxHealth;
     public float attack;
     public float reviewDistance;
     public float regeneration;
