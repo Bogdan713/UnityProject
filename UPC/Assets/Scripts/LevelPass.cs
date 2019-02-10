@@ -14,7 +14,7 @@ public class LevelPass : MonoBehaviour
     {
         if (collision.name.Equals("Character")) {
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
-            if (targets.Length != 0) {
+            if (targets.Length == 0) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }

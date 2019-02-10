@@ -12,13 +12,13 @@ public class RayWeapon : MonoBehaviour
     public IEnumerator Shoot(Vector2 targetPosition)
     {
 
-            //if (Input.GetButtonDown("Fire1"))
+        //if (Input.GetButtonDown("Fire1"))
 
-            //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 
         Vector2 playerPosition = player.position;
-        float playerRadius = player.GetComponent<CircleCollider2D>().radius*20;// real player Radius with scale
+        float playerRadius = player.GetComponent<CircleCollider2D>().radius * 20;// real player Radius with scale
 
         float dx = targetPosition.x - playerPosition.x;
         float dy = targetPosition.y - playerPosition.y;
@@ -36,26 +36,22 @@ public class RayWeapon : MonoBehaviour
             sublineRenderer.SetPosition(0, new Vector3(origin.x, origin.y, -2f));
             sublineRenderer.SetPosition(1, new Vector3(hitInfo.point.x, hitInfo.point.y, -2f));
 
-            if (hitInfo.transform.tag.Equals("Enemy"))
+            Enemy enemy = hitInfo.transform.gameObject.GetComponent<Enemy>();
+            Healer healer = hitInfo.transform.gameObject.GetComponent<Healer>();
+            Boss boss = hitInfo.transform.gameObject.GetComponent<Boss>();
+            if (enemy != null)
             {
-                Enemy enemy = hitInfo.transform.gameObject.GetComponent<Enemy>();
-                Healer healer = hitInfo.transform.gameObject.GetComponent<Healer>();
-                Boss boss = hitInfo.transform.gameObject.GetComponent<Boss>();
-                if (enemy!=null) {
-                    enemy.TakeDamage(player.GetComponent<Character>().attack);
-                }
+                enemy.TakeDamage(player.GetComponent<Character>().attack);
+            }
 
-                if (healer != null)
-                {
-                    healer.TakeDamage(player.GetComponent<Character>().attack);
-                }
+            if (healer != null)
+            {
+                healer.TakeDamage(player.GetComponent<Character>().attack);
+            }
 
-                if (boss != null)
-                {
-                    boss.TakeDamage(player.GetComponent<Character>().attack);
-                }
-
-
+            if (boss != null)
+            {
+                boss.TakeDamage(player.GetComponent<Character>().attack);
             }
         }
         lineRenderer.enabled = true;
@@ -63,7 +59,7 @@ public class RayWeapon : MonoBehaviour
         yield return new WaitForSeconds(0.04f);
         lineRenderer.enabled = false;
         yield return new WaitForSeconds(0.03f);
-        
+
         sublineRenderer.enabled = false;
         Instantiate(impactEffect, new Vector3(hitInfo.point.x, hitInfo.point.y, -3f), Quaternion.identity);
     }

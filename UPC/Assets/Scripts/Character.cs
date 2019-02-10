@@ -22,9 +22,9 @@ public class Character : SlimeCreature
         health = 5;
         maxHealth = health;
         speed = 20;
-        attack = 2;
+        attack = 112;
         regeneration = 0.2f;
-        attackDistance = 10;
+        attackDistance = 15;
         //isAttacking = false;
         rayWeapon = GetComponentInChildren<RayWeapon>();
     }

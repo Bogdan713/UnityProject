@@ -9,6 +9,7 @@ public class Boss : SlimeCreature
     private Dir dirrection;
     private Dir Dirrection { get => dirrection; set => dirrection = value; }
     public float stagnation;
+    public float potention;
     public GameObject Child;
 
     protected void Awake()
@@ -17,7 +18,7 @@ public class Boss : SlimeCreature
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (health <= 0)
         {
-            health = 50;
+            health = 20;
         }
         maxHealth = health;
         if (speed <= 0)
@@ -32,12 +33,15 @@ public class Boss : SlimeCreature
         {
             reviewDistance = 20;
         }
+        if (potention <= 0) {
+            potention = 0.5f;
+        }
         if (attack <= 0)
         {
             regeneration = 1f;
         }
         target = FindObjectOfType<Character>().transform;
-        dirrection = Dir.Wait;
+        dirrection = Dir.Towards;
         stagnation = 1f;
     }
 
@@ -56,7 +60,7 @@ public class Boss : SlimeCreature
     {
         if (Child != null && Random.value > 0.5)
         {
-            Instantiate(Child, new Vector3(transform.position.x, transform.position.y + 1, Child.transform.position.z), Quaternion.identity);
+            Instantiate(Child, new Vector3(transform.position.x, transform.position.y, Child.transform.position.z), Quaternion.identity);
         }
         base.TakeDamage(damage);
     }
@@ -121,6 +125,7 @@ public class Boss : SlimeCreature
             {
                 health = maxHealth;
             }
+            
         }
     }
 }

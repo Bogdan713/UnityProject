@@ -20,8 +20,8 @@ public class Healer : SlimeCreature
         speed = 4;
         minSpeed = speed;
         attack = -2;
-        reviewDistance = 15; 
-        regeneration = 2f;
+        reviewDistance = 16; 
+        regeneration = 3f;
         target = FindObjectOfType<Character>().transform;
         dirrection = Dir.Backwards;
         stagnation = 1f;
@@ -35,7 +35,13 @@ public class Healer : SlimeCreature
 
     void UpdateSpeed()
     {
-        speed = minSpeed * Mathf.Log(health, maxHealth);
+        if (health > 2)
+        {
+            speed = minSpeed * Mathf.Log(maxHealth, health);
+        }
+        else {
+            speed = minSpeed * 3;
+        }
         animator.speed = 1 + (speed / 10f);
     }
 

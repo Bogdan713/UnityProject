@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8843087913087497260}
   - component: {fileID: 8572720715684500214}
   - component: {fileID: 8572720715684500213}
-  - component: {fileID: 7187823601992715190}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -156,24 +155,9 @@ MonoBehaviour:
     type: 3}
   speed: 10
   health: 0
+  maxHealth: 0
   attack: 0
   reviewDistance: 0
   regeneration: 0
   target: {fileID: 0}
   stagnation: 0
---- !u!58 &7187823601992715190
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843087913087497259}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0008107675, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.070029736

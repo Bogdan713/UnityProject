@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : SlimeCreature
 {
     public Transform target;
-    private enum Dir {Towards, Backwards, Wait}
+    private enum Dir { Towards, Backwards, Wait }
     private Dir dirrection;
     private Dir Dirrection { get => dirrection; set => dirrection = value; }
     public float stagnation;
@@ -21,11 +21,12 @@ public class Enemy : SlimeCreature
         reviewDistance = 20;
         regeneration = 1f;
         target = FindObjectOfType<Character>().transform;
-        dirrection = Dir.Wait;
+        dirrection = Dir.Towards;
         stagnation = 1f;
     }
 
-    void Wait() {
+    void Wait()
+    {
         Dirrection = Dir.Wait;
         stagnation = 0.5f;
     }
@@ -51,7 +52,8 @@ public class Enemy : SlimeCreature
         }
     }
 
-    bool TargetInRange() {
+    bool TargetInRange()
+    {
         return (target.position - transform.position).magnitude < reviewDistance;
     }
 
@@ -64,9 +66,11 @@ public class Enemy : SlimeCreature
 
 
 
-        if (target!=null) {
+        if (target != null)
+        {
 
-            if (TargetInRange()) {
+            if (TargetInRange())
+            {
                 if (Dirrection == Dir.Towards)
                 {
                     MoveTo(target.position);//run to
@@ -78,10 +82,13 @@ public class Enemy : SlimeCreature
             }
             if (Dirrection == Dir.Wait)
             {
-                if (stagnation > 0) {
+                if (stagnation > 0)
+                {
                     stagnation -= Time.deltaTime;
                     MoveOutOf(target.position);
-                } else {
+                }
+                else
+                {
                     Dirrection = Dir.Towards;
                 }
             }
@@ -93,6 +100,15 @@ public class Enemy : SlimeCreature
             if (health > maxHealth)
             {
                 health = maxHealth;
+            }
+
+            if (health < maxHealth * 0.25f)
+            {
+                Dirrection = Dir.Backwards;
+            }
+            else if (Dirrection != Dir.Wait && health > maxHealth * 0.75f)
+            {
+
             }
         }
     }
