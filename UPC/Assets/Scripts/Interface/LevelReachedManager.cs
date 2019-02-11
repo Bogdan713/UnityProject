@@ -9,7 +9,7 @@ public class LevelReachedManager
     private static int levelReached = 1;
     public const int levelsNumber = 4;
     public static int LevelReached { get => levelReached; }
-    private static string path = @"D:/UnityData/levelReached.txt";
+    private static string path = Application.persistentDataPath + "/levelReached.txt";
     public static bool IsLevelReached(int level)
     {
         if (level > 0 && level <= levelsNumber && level <= levelReached)
@@ -31,6 +31,7 @@ public class LevelReachedManager
             }
             else {
                 File.Create(path);
+
                 FixSuccess();
             }
         }

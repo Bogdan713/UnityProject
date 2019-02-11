@@ -22,10 +22,17 @@ public static class SaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            GameData data = formatter.Deserialize(stream) as GameData;
+            GameData data;
+            if (stream.Length != 0)
+            {
+                data = formatter.Deserialize(stream) as GameData;
+            }
+            else {
+                Debug.Log("Save file is empty: " + path);
+                data = null;
+            }
             stream.Close();
             return data;
-
         }
         else
         {
