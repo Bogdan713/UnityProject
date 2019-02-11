@@ -51,6 +51,8 @@ public class Character : SlimeCreature
         List<GameObject> enemies = new List<GameObject>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Healer"));
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Boss"));
+
         float minDistanse = attackDistance + 1;
         int id = 0;
         for (int i = 0; i < enemies.Count; i++)
@@ -69,23 +71,22 @@ public class Character : SlimeCreature
 
     void KillEveryone() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies) {
+        GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
+        foreach (GameObject enemy in enemies)
+        {
             Enemy e1 = enemy.GetComponent<Enemy>();
-            Boss e2 = enemy.GetComponent<Boss>();
-            Healer e3 = enemy.GetComponent<Healer>();
             if (e1 != null)
             {
                 e1.Die();
             }
-            if (e2 != null)
+        }
+        foreach (GameObject boss in bosses)
+        {
+            Boss e1 = boss.GetComponent<Boss>();
+            if (e1 != null)
             {
-                e2.Die();
+                e1.Die();
             }
-            if (e3 != null)
-            {
-                e3.Die();
-            }
-
         }
     }
 

@@ -18,7 +18,7 @@ public class Boss : SlimeCreature
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (health <= 0)
         {
-            health = 20;
+            health = 30;
         }
         maxHealth = health;
         if (speed <= 0)

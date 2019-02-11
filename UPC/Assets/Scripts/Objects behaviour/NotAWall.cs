@@ -10,7 +10,9 @@ public class NotAWall : MonoBehaviour
         if (collision.name.Equals("Character"))
         {
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
-            if (targets.Length == 0)
+            GameObject[] targets2 = GameObject.FindGameObjectsWithTag("Boss");
+
+            if (targets.Length == 0 && targets2.Length == 0)
             {
                 for (int i = 0; i < 10; i++)
                 {

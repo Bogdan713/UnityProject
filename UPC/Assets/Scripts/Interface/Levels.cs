@@ -36,6 +36,7 @@ public class Levels : MonoBehaviour
         LevelReachedManager.InitializeFromFile();
         if (LevelReachedManager.IsLevelReached(scene))
         {
+            SaveSystem.shoodLoadTheGame = false;
             SceneManager.LoadScene(scene);
         }
     }
