@@ -1,29 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//serializable objct for data saving in file
 [System.Serializable]
 public class GameData
 {
+    //about player
     public float[] playerPosition;
     public float playerHealth;
+    //about enemies
     public int ENumber;
     public float[][] EPositions;
     public float[] EHealth;
+    //about bosses
     public int BNumber;
     public float[][] BPositions;
     public float[] BHealth;
+    //about healers
     public int HNumber;
     public float[][] HPositions;
     public float[] HHealth;
     public int SceneNumber;
-    public GameData(GameObject player, GameObject[] e, GameObject[] b, GameObject[] h, int scene) {
+    
+    public GameData(GameObject player, GameObject[] e, GameObject[] b, GameObject[] h, int scene)
+    {
         SceneNumber = scene;
         playerPosition = new float[3];
         playerPosition[0] = player.transform.position.x;
         playerPosition[1] = player.transform.position.y;
         playerPosition[2] = player.transform.position.z;
         playerHealth = player.GetComponent<Character>().health;
-
         ENumber = e.Length;
         EPositions = new float[e.Length][];
         EHealth = new float[e.Length];
@@ -35,7 +41,6 @@ public class GameData
             EPositions[i][2] = e[i].transform.position.z;
             EHealth[i] = e[i].GetComponent<Enemy>().health;
         }
-
         BNumber = b.Length;
         BPositions = new float[b.Length][];
         BHealth = new float[b.Length];
@@ -47,7 +52,6 @@ public class GameData
             BPositions[i][2] = b[i].transform.position.z;
             BHealth[i] = b[i].GetComponent<Boss>().health;
         }
-
         HNumber = h.Length;
         HPositions = new float[h.Length][];
         HHealth = new float[h.Length];
@@ -57,7 +61,10 @@ public class GameData
             HPositions[i][0] = h[i].transform.position.x;
             HPositions[i][1] = h[i].transform.position.y;
             HPositions[i][2] = h[i].transform.position.z;
-            HHealth[i] = h[i].GetComponent<Healer>().health;
+            Healer hi = h[i].GetComponent<Healer>();
+            if (hi!=null) {
+                HHealth[i] = hi.health;
+            }
         }
     }
 }

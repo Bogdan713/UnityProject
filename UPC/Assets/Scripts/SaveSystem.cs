@@ -7,6 +7,7 @@ public static class SaveSystem
 {
     static string path = Application.persistentDataPath + "/gameSaved.fun";
     public static bool shoodLoadTheGame = false;
+
     public static void SaveGame(GameObject player, GameObject[] e, GameObject[] b, GameObject[] h, int sceneNumber)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -16,6 +17,7 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
     }
+
     public static GameData LoadGame()
     {
         if (File.Exists(path))
@@ -27,7 +29,8 @@ public static class SaveSystem
             {
                 data = formatter.Deserialize(stream) as GameData;
             }
-            else {
+            else
+            {
                 Debug.Log("Save file is empty: " + path);
                 data = null;
             }

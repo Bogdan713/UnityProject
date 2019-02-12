@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Boss : SlimeCreature
 {
-    public Transform target;
-    private enum Dir { Towards, Backwards, Wait }
-    private Dir dirrection;
+    public Transform target;//Player transform
+    private enum Dir { Towards, Backwards, Wait }//Behaviour types
+    private Dir dirrection;//Behaviour
     private Dir Dirrection { get => dirrection; set => dirrection = value; }
-    public float stagnation;
-    public float potention;
+    public float stagnation;//delay after attack
+    public float potention;//how often generate children
     public GameObject Child;
 
     protected void Awake()
@@ -33,7 +33,8 @@ public class Boss : SlimeCreature
         {
             reviewDistance = 20;
         }
-        if (potention <= 0) {
+        if (potention <= 0)
+        {
             potention = 0.5f;
         }
         if (attack <= 0)
@@ -51,14 +52,10 @@ public class Boss : SlimeCreature
         stagnation = 0.5f;
     }
 
-    void Attack()
-    {
-        //State = CharacterState.AttackDown;
-    }
-
     public new void TakeDamage(float damage)
     {
-        if (Child != null && Random.value > 0.5)
+        //generate children with some chance
+        if (Child != null && Random.value > potention)
         {
             Instantiate(Child, new Vector3(transform.position.x, transform.position.y, Child.transform.position.z), Quaternion.identity);
         }
@@ -68,11 +65,11 @@ public class Boss : SlimeCreature
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Character character = collision.collider.GetComponent<Character>();
+        //demand player on collision
         if (character != null)
         {
             character.TakeDamage(attack);
             Wait();
-            //Debug.Log("Character takes " + attack + " damage from Enemy");
         }
     }
 
@@ -85,11 +82,7 @@ public class Boss : SlimeCreature
     void Update()
     {
         State = AnimationState.Idle;
-
-        //MoveTo(transform.position - target.position);//run away
-
-
-
+        //behaviour
         if (target != null)
         {
 
@@ -97,7 +90,7 @@ public class Boss : SlimeCreature
             {
                 if (Dirrection == Dir.Towards)
                 {
-                    MoveTo(target.position);//run to
+                    MoveTo(target.position);
                 }
                 if (Dirrection == Dir.Backwards)
                 {
@@ -117,7 +110,7 @@ public class Boss : SlimeCreature
                 }
             }
         }
-
+        //regeneration
         if (health < maxHealth)
         {
             health += Time.deltaTime * regeneration;
@@ -125,7 +118,6 @@ public class Boss : SlimeCreature
             {
                 health = maxHealth;
             }
-            
         }
     }
 }

@@ -9,6 +9,7 @@ public class Lover : SlimeCreature
     private Dir dirrection;
     private Dir Dirrection { get => dirrection; set => dirrection = value; }
     public float stagnation;
+    public bool hasWinner = false;
 
     void Awake()
     {
@@ -39,9 +40,10 @@ public class Lover : SlimeCreature
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Character character = collision.collider.GetComponent<Character>();
-        if (character != null)
+        if (character != null && !hasWinner)
         {
-            character.TakeDamage(attack);
+            GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, MSGManager.MSGType.YouWin);
+            hasWinner = true;
         }
     }
 
@@ -61,7 +63,7 @@ public class Lover : SlimeCreature
             {
                 if (Dirrection == Dir.Towards)
                 {
-                    MoveTo(target.position);//run to
+                    MoveTo(target.position);
                 }
                 if (Dirrection == Dir.Backwards)
                 {

@@ -20,7 +20,8 @@ public class LivesBar : MonoBehaviour
 
     public void Refresh()
     {
-        if (character != null) {
+        if (character != null)
+        {
             for (int i = 0; i < hearts.Length; i++)
             {
                 if (i < character.health)
@@ -30,7 +31,6 @@ public class LivesBar : MonoBehaviour
                 else
                 {
                     hearts[i].gameObject.SetActive(false);
-
                 }
             }
         }

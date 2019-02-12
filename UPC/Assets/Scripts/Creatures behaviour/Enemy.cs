@@ -14,7 +14,7 @@ public class Enemy : SlimeCreature
     {
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        health = 5;
+        health = 5; 
         maxHealth = health;
         speed = 5;
         attack = 1;
@@ -31,11 +31,6 @@ public class Enemy : SlimeCreature
         stagnation = 0.5f;
     }
 
-    void Attack()
-    {
-        //State = CharacterState.AttackDown;
-    }
-
     public new void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
@@ -48,7 +43,6 @@ public class Enemy : SlimeCreature
         {
             character.TakeDamage(attack);
             Wait();
-            //Debug.Log("Character takes " + attack + " damage from Enemy");
         }
     }
 
@@ -61,19 +55,13 @@ public class Enemy : SlimeCreature
     void Update()
     {
         State = AnimationState.Idle;
-
-        //MoveTo(transform.position - target.position);//run away
-
-
-
         if (target != null)
         {
-
             if (TargetInRange())
             {
                 if (Dirrection == Dir.Towards)
                 {
-                    MoveTo(target.position);//run to
+                    MoveTo(target.position);
                 }
                 if (Dirrection == Dir.Backwards)
                 {
@@ -93,7 +81,7 @@ public class Enemy : SlimeCreature
                 }
             }
         }
-
+        //progressive, smart AI
         if (health < maxHealth)
         {
             health += Time.deltaTime * regeneration;
@@ -108,7 +96,7 @@ public class Enemy : SlimeCreature
             }
             else if (Dirrection != Dir.Wait && health > maxHealth * 0.75f)
             {
-
+                Dirrection = Dir.Towards;
             }
         }
     }

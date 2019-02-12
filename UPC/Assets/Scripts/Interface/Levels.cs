@@ -8,6 +8,7 @@ public class Levels : MonoBehaviour
 {
     public GameObject[] levels = new GameObject[LevelReachedManager.levelsNumber];
     public GameObject levelList;
+
     private void Awake()
     {
         for (int i = 0; i < levels.Length; i++)
@@ -16,6 +17,7 @@ public class Levels : MonoBehaviour
         }
         Refresh();
     }
+
     public void Refresh()
     {
         LevelReachedManager.InitializeFromFile();

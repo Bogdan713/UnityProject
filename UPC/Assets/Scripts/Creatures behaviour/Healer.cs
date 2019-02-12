@@ -20,7 +20,7 @@ public class Healer : SlimeCreature
         speed = 4;
         minSpeed = speed;
         attack = -2;
-        reviewDistance = 16; 
+        reviewDistance = 16;
         regeneration = 3f;
         target = FindObjectOfType<Character>().transform;
         dirrection = Dir.Backwards;
@@ -39,7 +39,8 @@ public class Healer : SlimeCreature
         {
             speed = minSpeed * Mathf.Log(maxHealth, health);
         }
-        else {
+        else
+        {
             speed = minSpeed * 3;
         }
         animator.speed = 1 + (speed / 10f);
@@ -70,10 +71,6 @@ public class Healer : SlimeCreature
     {
         State = AnimationState.Idle;
 
-        //MoveTo(transform.position - target.position);//run away
-
-
-
         if (target != null)
         {
 
@@ -81,7 +78,7 @@ public class Healer : SlimeCreature
             {
                 if (Dirrection == Dir.Towards)
                 {
-                    MoveTo(target.position);//run to
+                    MoveTo(target.position);
                 }
                 if (Dirrection == Dir.Backwards)
                 {
@@ -100,9 +97,11 @@ public class Healer : SlimeCreature
                     Dirrection = Dir.Backwards;
                 }
             }
-            if (health<maxHealth) {
+            if (health < maxHealth)
+            {
                 health += Time.deltaTime * regeneration;
-                if (health > maxHealth) {
+                if (health > maxHealth)
+                {
                     health = maxHealth;
                 }
                 UpdateSpeed();

@@ -10,6 +10,7 @@ public class LevelReachedManager
     public const int levelsNumber = 4;
     public static int LevelReached { get => levelReached; }
     private static string path = Application.persistentDataPath + "/levelReached.txt";
+
     public static bool IsLevelReached(int level)
     {
         if (level > 0 && level <= levelsNumber && level <= levelReached)
@@ -18,8 +19,10 @@ public class LevelReachedManager
         }
         return false;
     }
-    public static void InitializeFromFile() {
-        
+
+    public static void InitializeFromFile()
+    {
+
         int levelFromFile = 1;
         try
         {
@@ -29,26 +32,30 @@ public class LevelReachedManager
                 levelFromFile = Int32.Parse(streamReader.ReadLine());
                 streamReader.Close();
             }
-            else {
+            else
+            {
                 File.Create(path);
 
                 FixSuccess();
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Debug.Log(e.Message);
         }
-        finally {
+        finally
+        {
             if (levelFromFile > 0 && levelFromFile <= levelsNumber)
             {
                 levelReached = levelFromFile;
-                
+
             }
         }
     }
+
     public static void ReachLevel(int level = 1)
     {
-        Debug.Log("Reached level "+ level);
+        Debug.Log("Reached level " + level);
         if (level > 0 && level <= levelsNumber && level > levelReached)
         {
             levelReached = level;
@@ -63,7 +70,8 @@ public class LevelReachedManager
         streamWriter.Close();
     }
 
-    public static void Reset() {
+    public static void Reset()
+    {
         levelReached = 1;
         FixSuccess();
     }

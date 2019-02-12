@@ -19,13 +19,13 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        
+
         if (target != null)
         {
             positionTarget = target.position;
             positionTarget.z = -10f;
         }
-        
+        //range control
         if (positionTarget.x < rect.xMin)
         {
             positionTarget.x = rect.xMin;
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         {
             positionTarget.y = rect.yMax;
         }
-        
+
         transform.position = Vector3.Lerp(transform.position, positionTarget, speed * Time.deltaTime);
     }
 }

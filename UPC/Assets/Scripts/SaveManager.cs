@@ -9,15 +9,17 @@ public class SaveManager : MonoBehaviour
     public GameObject enemy;
     public GameObject boss;
 
-    public float saveDelay = 10;
+    public float saveDelay = 10f;
     public float timeToSave;
     private void Awake()
     {
         timeToSave = saveDelay;
-        if (SaveSystem.shoodLoadTheGame) {
+        if (SaveSystem.shoodLoadTheGame)
+        {
             Load();
         }
     }
+
     public void Save()
     {
         GameObject[] h = GameObject.FindGameObjectsWithTag("Healer");
@@ -27,8 +29,11 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Game saving");
         SaveSystem.SaveGame(player, e, b, h, level);
         Debug.Log("Game saved");
+        GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, MSGManager.MSGType.Saved);
     }
-    public void Load() {
+
+    public void Load()
+    {
         SaveSystem.shoodLoadTheGame = false;
         GameObject[] h = GameObject.FindGameObjectsWithTag("Healer");
         GameObject[] e = GameObject.FindGameObjectsWithTag("Enemy");
@@ -46,7 +51,8 @@ public class SaveManager : MonoBehaviour
             Destroy(b[i]);
         }
         GameData data = SaveSystem.LoadGame();
-        if (data!=null) {
+        if (data != null)
+        {
             player.transform.position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
             player.GetComponent<Character>().health = data.playerHealth;
 
@@ -70,6 +76,7 @@ public class SaveManager : MonoBehaviour
             }
         }
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -77,7 +84,8 @@ public class SaveManager : MonoBehaviour
         {
             timeToSave -= Time.deltaTime;
         }
-        else {
+        else
+        {
             Save();
             timeToSave = saveDelay;
         }

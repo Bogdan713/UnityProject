@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
     public GameObject continueButton;
     private void Awake()
     {
@@ -16,29 +17,27 @@ public class MenuManager : MonoBehaviour {
         Application.Quit();
     }
 
-    void CheckContinue() {
+    void CheckContinue()
+    {
         GameData gameData = SaveSystem.LoadGame();
         if (gameData != null)
         {
             continueButton.GetComponent<Button>().interactable = true;
         }
-        else {
+        else
+        {
             continueButton.GetComponent<Button>().interactable = false;
         }
     }
 
     public void OnContinuePressed()
     {
-        Debug.Log("OnContinuePressed");
         CheckContinue();
         GameData gameData = SaveSystem.LoadGame();
-        if (gameData != null) {
+        if (gameData != null)
+        {
             SaveSystem.shoodLoadTheGame = true;
-            Debug.Log("LoadScene" + gameData.SceneNumber);
             SceneManager.LoadScene(gameData.SceneNumber);
         }
     }
-
-
-
 }

@@ -11,12 +11,6 @@ public class RayWeapon : MonoBehaviour
 
     public IEnumerator Shoot(Vector2 targetPosition)
     {
-
-        //if (Input.GetButtonDown("Fire1"))
-
-        //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
         Vector2 playerPosition = player.position;
         float playerRadius = player.GetComponent<CircleCollider2D>().radius * 20;// real player Radius with scale
 
@@ -59,7 +53,6 @@ public class RayWeapon : MonoBehaviour
         yield return new WaitForSeconds(0.04f);
         lineRenderer.enabled = false;
         yield return new WaitForSeconds(0.03f);
-
         sublineRenderer.enabled = false;
         Instantiate(impactEffect, new Vector3(hitInfo.point.x, hitInfo.point.y, -3f), Quaternion.identity);
     }

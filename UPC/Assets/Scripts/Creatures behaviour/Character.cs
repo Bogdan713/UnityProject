@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Character : SlimeCreature
 {
     public LivesBar livesBar;
     public float attackDistance;
     RayWeapon rayWeapon;
-   // public bool isAttacking;
-
+    bool hasToSayHello = true;
     public new void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        if (health < 0) {
+            GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, MSGManager.MSGType.YouDied);
+        }
         RefreshLivesBar();
     }
-    protected void Awake()
+
+    void Awake()
     {
         livesBar = FindObjectOfType<LivesBar>();
         animator = GetComponentInChildren<Animator>();
@@ -22,10 +25,9 @@ public class Character : SlimeCreature
         health = 5;
         maxHealth = health;
         speed = 20;
-        attack = 112;
+        attack = 2;
         regeneration = 0.2f;
         attackDistance = 15;
-        //isAttacking = false;
         rayWeapon = GetComponentInChildren<RayWeapon>();
     }
 
@@ -49,12 +51,13 @@ public class Character : SlimeCreature
     void Attack()
     {
         List<GameObject> enemies = new List<GameObject>();
+        //find all targets
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Healer"));
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Boss"));
-
         float minDistanse = attackDistance + 1;
         int id = 0;
+        //find closest
         for (int i = 0; i < enemies.Count; i++)
         {
             if ((enemies[i].transform.position - transform.position).magnitude < minDistanse)
@@ -63,13 +66,16 @@ public class Character : SlimeCreature
                 id = i;
             }
         }
-        if (minDistanse <= attackDistance) {
-                StartCoroutine(rayWeapon.Shoot(enemies[id].transform.position));
+        //attack if it's in range
+        if (minDistanse <= attackDistance)
+        {
+            StartCoroutine(rayWeapon.Shoot(enemies[id].transform.position));
         }
-        
-    }
 
-    void KillEveryone() {
+    }
+    //cheating
+    void KillEveryone()
+    {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] bosses = GameObject.FindGameObjectsWithTag("Boss");
         foreach (GameObject enemy in enemies)
@@ -92,6 +98,11 @@ public class Character : SlimeCreature
 
     void Update()
     {
+        if (hasToSayHello)
+        {
+            GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, (MSGManager.MSGType)SceneManager.GetActiveScene().buildIndex);
+            hasToSayHello = false;
+        }
         State = AnimationState.Idle;
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
@@ -110,7 +121,8 @@ public class Character : SlimeCreature
             }
             RefreshLivesBar();
         }
-        if (Input.GetKeyDown(KeyCode.K)) {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
             KillEveryone();
         }
     }

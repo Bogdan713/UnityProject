@@ -7,15 +7,15 @@ public class SlimeCreature : MonoBehaviour
     protected enum AnimationState { Idle, Move }
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
-    public GameObject deathEffect;
 
+    public GameObject deathEffect;
     public float speed;
     public float health;
     public float maxHealth;
     public float attack;
     public float reviewDistance;
     public float regeneration;
-     
+
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -42,12 +42,15 @@ public class SlimeCreature : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
         State = AnimationState.Move;
     }
+
     protected void MoveSubjTo(Vector3 direction)
     {
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
         State = AnimationState.Move;
     }
-    protected void MoveOutOf(Vector3 direction) {
+
+    protected void MoveOutOf(Vector3 direction)
+    {
         MoveSubjTo(transform.position - direction);
     }
 }
