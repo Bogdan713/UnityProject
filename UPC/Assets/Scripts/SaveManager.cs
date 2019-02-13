@@ -29,7 +29,7 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Game saving");
         SaveSystem.SaveGame(player, e, b, h, level);
         Debug.Log("Game saved");
-        GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, MSGManager.MSGType.Saved);
+        GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(new Vector3(transform.position.x, transform.position.y-10, transform.position.z), MSGManager.MSGType.Saved);
     }
 
     public void Load()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : SlimeCreature
 {
@@ -18,7 +19,7 @@ public class Boss : SlimeCreature
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (health <= 0)
         {
-            health = 30;
+            health = 30 + (SceneManager.GetActiveScene().buildIndex*20);
         }
         maxHealth = health;
         if (speed <= 0)

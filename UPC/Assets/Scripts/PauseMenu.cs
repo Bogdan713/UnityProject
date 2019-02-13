@@ -8,12 +8,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+    bool hasToReload = false;
+    float reloadDelay = 3f;
     // Update is called once per frame
     void Update()
     {
@@ -28,8 +24,16 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+        if (hasToReload) {
+            reloadDelay -= Time.deltaTime;
+            if (reloadDelay<0) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
-
+    public void Reload() {
+        hasToReload = true;
+    }
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -40,14 +44,13 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0.01f;
         gameIsPaused = true;
     }
 
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-
         SceneManager.LoadScene("Menu");
 
     }

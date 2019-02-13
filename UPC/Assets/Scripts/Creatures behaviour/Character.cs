@@ -13,6 +13,7 @@ public class Character : SlimeCreature
         base.TakeDamage(damage);
         if (health < 0) {
             GameObject.FindGameObjectWithTag("MSG").GetComponent<MSGManager>().InstantiateMSG(transform.position, MSGManager.MSGType.YouDied);
+            GameObject.FindGameObjectWithTag("Pause").GetComponent<PauseMenu>().Reload();
         }
         RefreshLivesBar();
     }
@@ -24,7 +25,7 @@ public class Character : SlimeCreature
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5;
         maxHealth = health;
-        speed = 20;
+        speed = 9;
         attack = 2;
         regeneration = 0.2f;
         attackDistance = 15;

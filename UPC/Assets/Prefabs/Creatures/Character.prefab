@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 8497634910539297892, guid: 31bcc731c54b113409efd38b1f330fcc,
     type: 3}
-  speed: 15
+  speed: 9
   health: 0
   maxHealth: 0
   attack: 0
@@ -481,3 +481,5 @@ MonoBehaviour:
   healer: {fileID: 3113266992848822668, guid: 8285d2b7ddf61944eae3ae13d995688d, type: 3}
   enemy: {fileID: 8843087913087497259, guid: 2419e94cb4cd24f4cae5e8b3a5acc55e, type: 3}
   boss: {fileID: 0}
+  saveDelay: 10
+  timeToSave: 0
