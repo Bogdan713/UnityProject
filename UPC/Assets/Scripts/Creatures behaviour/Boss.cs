@@ -17,31 +17,13 @@ public class Boss : SlimeCreature
     {
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (health <= 0)
-        {
-            health = 30 + (SceneManager.GetActiveScene().buildIndex*20);
-        }
+        health = 30 + (SceneManager.GetActiveScene().buildIndex*20);
         maxHealth = health;
-        if (speed <= 0)
-        {
-            speed = 7;
-        }
-        if (attack <= 0)
-        {
-            attack = 2;
-        }
-        if (attack <= 0)
-        {
-            reviewDistance = 20;
-        }
-        if (potention <= 0)
-        {
-            potention = 0.5f;
-        }
-        if (attack <= 0)
-        {
-            regeneration = 1f;
-        }
+        speed = 7;
+        attack = 2;
+        reviewDistance = 25;
+        potention = 0.5f;
+        regeneration = 1f;
         target = FindObjectOfType<Character>().transform;
         dirrection = Dir.Towards;
         stagnation = 1f;

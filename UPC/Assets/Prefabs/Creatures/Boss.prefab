@@ -153,12 +153,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 5274619381260588725, guid: f51c2554b53de9f4498fd3f4d7263c7f,
     type: 3}
-  speed: 7
-  health: 30
+  speed: 0
+  health: 0
   maxHealth: 0
-  attack: 2
-  reviewDistance: 20
-  regeneration: 2
+  attack: 0
+  reviewDistance: 0
+  regeneration: 0
   target: {fileID: 0}
   stagnation: 0
   potention: 0

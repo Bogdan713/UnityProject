@@ -16,7 +16,7 @@ public class Enemy : SlimeCreature
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         health = 5; 
         maxHealth = health;
-        speed = 5;
+        speed = 6;
         attack = 1;
         reviewDistance = 20;
         regeneration = 1f;
